@@ -1,4 +1,6 @@
 const { GraphQLServer, PubSub } = require('graphql-yoga');
+const { v4 : uuidv4 } = require ('uuid');
+
 
 const messages = [];
 const subscribers = [];
@@ -44,7 +46,7 @@ const resolvers = {
         messages: {
             subscribe: (parent, args, {pubsub}) => {
                 // Get a channel id for this subscription request
-                const channel = Math.random().toString(36).slice(2,15);
+                const channel = uuidv4();
                 // Add a notify callback ready to the pool of subscribers
                 onMessageUpdate(() => notify(channel));
                 // Notify the subscriber upon subscription for the first time
