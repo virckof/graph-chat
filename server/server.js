@@ -6,6 +6,10 @@ const messages = [];
 const subscribers = [];
 const onMessageUpdate = (notify) => subscribers.push(notify);
 
+// ------------------------------------------------------------------
+// Schema
+// ------------------------------------------------------------------
+
 const typeDefs = `
     type Message {
         id: ID!
@@ -25,6 +29,10 @@ const typeDefs = `
         messages: [Message!]
     }
 `;
+
+// ------------------------------------------------------------------
+// Resolvers
+// ------------------------------------------------------------------
 
 const resolvers = {
     Query: {
@@ -57,6 +65,10 @@ const resolvers = {
     }
 }
 
+// ------------------------------------------------------------------
+// Publish and Subscriber Utilities
+// ------------------------------------------------------------------
+
 const notify = (channel) => {
     pubsub.publish(channel, {messages});
 };
@@ -65,10 +77,13 @@ const notifyAllSubscribers = () => {
     subscribers.forEach(notify => notify());
 };
 
-const pubsub = new PubSub();
-const context = {pubsub};
-const server = new GraphQLServer({typeDefs, resolvers, context});
+// ------------------------------------------------------------------
+// Main Server Initialization
+// https://github.com/apollographql/graphql-subscriptions
+// ------------------------------------------------------------------
 
+const pubsub = new PubSub();
+const server = new GraphQLServer({typeDefs, resolvers, context: {pubsub}});
 
 server.start(({port}) => {
     console.log(`Server started on port http://localhost:${port}/`);

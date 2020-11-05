@@ -1,13 +1,11 @@
 import React, {useEffect} from "react";
-import { useQuery} from '@apollo/client';
-import {GET_MESSAGES} from "./Queries";
+import { useSubscription} from '@apollo/client';
+import {SUBSCRIBE_TO_MESSAGES} from "./Queries";
 
 
 export const Messages = ({user}) => {
 
-    const {data} = useQuery(GET_MESSAGES, {
-        pollInterval: 500
-    });
+    const {data} = useSubscription(SUBSCRIBE_TO_MESSAGES);
 
     useEffect(() => {
         updateScroll();

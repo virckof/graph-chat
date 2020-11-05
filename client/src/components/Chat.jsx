@@ -1,4 +1,5 @@
 import { ApolloClient, InMemoryCache, ApolloProvider, useMutation } from '@apollo/client';
+import { WebSocketLink } from '@apollo/client/link/ws';
 import React, {useState} from "react";
 import {Messages} from "./Messages";
 import {Container} from "shards-react";
@@ -6,10 +7,21 @@ import {Controls} from "./Controls";
 import {SEND_MESSAGE} from "./Queries";
 import {Card, CardHeader, CardBody} from "shards-react";
 
+
+const link = new WebSocketLink({
+  uri: `ws://localhost:4000`,
+  options: {
+    reconnect: true
+  }
+});
+
 const client = new ApolloClient({
   uri: 'http://localhost:4000',
-  cache: new InMemoryCache()
+  cache: new InMemoryCache(),
+  link
 });
+
+
 
 
 const Chat = () => {
@@ -32,7 +44,7 @@ const Chat = () => {
     }
 
     const handleSendMessage = () => {
-      if(content && content !== "" ) {
+      if(control.content && control.content !== "" ) {
         sendMessage({variables:control})
         setControl({...control, content: ""})
       }

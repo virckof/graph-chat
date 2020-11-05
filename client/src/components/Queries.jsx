@@ -17,7 +17,18 @@ const SEND_MESSAGE = gql`
     }
 `;
 
+const SUBSCRIBE_TO_MESSAGES = gql`
+    subscription {
+        messages {
+            id
+            content
+            user
+        }
+    }
+`;
+
 export {
     GET_MESSAGES,
-    SEND_MESSAGE
+    SEND_MESSAGE,
+    SUBSCRIBE_TO_MESSAGES
 }
