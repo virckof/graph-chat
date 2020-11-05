@@ -1,7 +1,6 @@
 const { GraphQLServer } = require('graphql-yoga');
 
 const messages = [];
-let greet = "Hello";
 
 const typeDefs = `
     type Message {
