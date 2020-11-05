@@ -3,7 +3,8 @@ import {FormInput, Row, Col, Button} from "shards-react";
 
 export const Controls = ({user, content, onUserChange, onContentChange, onSend}) => {
 
-    const controlStyle = {padding:0};
+    const controlStyle = {paddingLeft:10};
+    const sendButtonStyle = {width: "100%"};
 
     const handleEnterHit = (e) => {
         if(e.keyCode === 13) {
@@ -29,7 +30,7 @@ export const Controls = ({user, content, onUserChange, onContentChange, onSend})
                 />
             </Col>
             <Col xs={2} style={controlStyle}>
-                <Button onClick={onSend}> Send </Button>
+                <Button style= {sendButtonStyle} onClick={onSend}> Send </Button>
             </Col>
         </Row>
     );

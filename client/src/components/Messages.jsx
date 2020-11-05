@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { useQuery} from '@apollo/client';
 import {GET_MESSAGES} from "./Queries";
 
@@ -8,6 +8,17 @@ export const Messages = ({user}) => {
     const {data} = useQuery(GET_MESSAGES, {
         pollInterval: 500
     });
+
+    useEffect(() => {
+        updateScroll();
+     }, [data]);
+
+    const updateScroll = () => {
+        var element = document.getElementById("chatMessages");
+        if(element){
+            element.scrollTop = element.scrollHeight;
+        }
+    }
 
     if(!data){
         return null;
@@ -26,7 +37,7 @@ export const Messages = ({user}) => {
             color: user === message.user ? 'white' : 'black',
             padding: "1em",
             borderRadius: "1em",
-            maxWidth: "60%"
+            maxWidth: "60%",
         };
     
         const userStyle = {
@@ -36,8 +47,8 @@ export const Messages = ({user}) => {
             border: "2px solid #e5e6ea",
             borderRadius: 25,
             textAlign: "center",
-            fontSize: "18pt",
-            paddingTop: 5
+            fontSize: "15pt",
+            paddingTop: 8
         };
 
         return (
@@ -48,5 +59,15 @@ export const Messages = ({user}) => {
         );
     });
 
-    return messages;
+    const containerStyle = {
+        overflowY: "scroll",
+        maxHeight: 400,
+        marginBottom: 10
+    };
+
+    return (
+        <div style={containerStyle} id="chatMessages">
+            {messages}
+        </div>
+    );
 }
