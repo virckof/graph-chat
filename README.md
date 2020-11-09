@@ -1,5 +1,5 @@
 # Graph Chat
-A toy application playing with Apollo Client and GraphQL Yoga and React following the tutorial found in [here](https://www.youtube.com/watch?v=E3NHd-PkLrQ&ab_channel=TraversyMedia).
+A toy application playing with [Apollo Client and GraphQL Yoga and React](https://www.youtube.com/watch?v=E3NHd-PkLrQ&ab_channel=TraversyMedia).
 
 To start the server:
 - `cd server`
