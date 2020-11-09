@@ -12,3 +12,8 @@ To start the client:
 - `yarn install`
 - `yarn start`
 - The react application will be deployed on http://localhost:8080
+
+
+To deploy in GitHub Pages:
+- `yarn deploy`
+- The app should be available in https://virckof.github.io/graph-chat/
