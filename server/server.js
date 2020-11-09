@@ -84,7 +84,14 @@ const notifyAllSubscribers = () => {
 
 const pubsub = new PubSub();
 const server = new GraphQLServer({typeDefs, resolvers, context: {pubsub}});
-
-server.start(({port}) => {
+const options = {
+    subscriptions: {
+        onDisconnect: (webSocket, context) => {
+            console.log(JSON.stringify(context));
+        }
+    }
+};
+server.start(options, ({port}) => {
     console.log(`Server started on port http://localhost:${port}/`);
 });
+
