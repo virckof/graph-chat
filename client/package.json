@@ -1,6 +1,7 @@
 {
   "name": "wp5-starter-react",
   "version": "1.0.0",
+  "homepage": "http://virckof.github.io/graph-chat",
   "scripts": {
     "build": "webpack --mode production",
     "build:dev": "webpack --mode development",
@@ -8,7 +9,9 @@
     "start": "webpack-dev-server --open --mode development",
     "start:live": "webpack-dev-server --open --mode development --liveReload",
     "docker:build": "docker build . -t wp5-starter",
-    "docker:run": "docker run -p 8080:8080 wp5-starter"
+    "docker:run": "docker run -p 8080:8080 wp5-starter",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "license": "MIT",
   "author": {
@@ -22,6 +25,7 @@
     "@babel/preset-react": "7.9.4",
     "babel-loader": "8.1.0",
     "css-loader": "^3.5.3",
+    "gh-pages": "^3.1.0",
     "html-webpack-plugin": "next",
     "style-loader": "1.2.1",
     "webpack": "5.0.0",
